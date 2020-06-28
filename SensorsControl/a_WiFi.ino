@@ -2,14 +2,16 @@
 //                    HTTPS requests
 //=======================================================================
 int connect_host(WiFiClientSecure* httpsClient){
-  Serial.println(host);
+  
+  Serial.println("Host: ");
+  Serial.print(host);
  
   Serial.printf("Using fingerprint '%s'\n", fingerprint);
   (*httpsClient).setFingerprint(fingerprint);
   (*httpsClient).setTimeout(15000); // 15 Seconds
   delay(1000);
   
-  Serial.print("HTTPS Connecting");
+  Serial.println("HTTPS Connecting");
   int r=0; //retry counter
   while((!(*httpsClient).connect(host, httpsPort)) && (r < 30)){
       delay(100);

@@ -8,7 +8,7 @@ void loop() {
   WiFiClientSecure httpsClient;
   int client_error_code = connect_host(&httpsClient);
   if(client_error_code != 0) return;
-
+  
   String response;
   String Link, ADCData, getData;
 
@@ -34,6 +34,6 @@ void loop() {
   
  
   
-  delay(3000);  //GET Data at every 3 seconds
+  delay(2300);  
 }
 //=======================================================================
