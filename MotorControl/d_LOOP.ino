@@ -7,16 +7,24 @@ void loop() {
   if(client_error_code != 0) return;
 
   String response;
-  String Link;//, ADCData, getData;
-  //int adcvalue=analogRead(A0);  //Read Analog value of LDR
-  //ADCData = String(adcvalue);   //String to interger conversion
+  String Link;
   //GET Data:
   Link = "/getConnectionDetails?arduinoID=a" ;//+ ADCData;
-  
   response = req(httpsClient,Link);
-  parse_ArduinoIDQuery(response);
+  parse_ArduinoIDQuery(response); //Get the RPM, Manual etc..
+
+  //Move stepper:
+  if(data_manual){//Control via App: use RPM
+    push_speed = map(data_rpm,12,20,0,1000);
+  }else{//Control via Sensors: use BPM (and OXI not)
+    push_speed = map(data_sensor_bpm,20,60,0,1000);
+  }
+  Serial.print("Push before: ");
+  Serial.println(push_speed);
+  push_speed += 2000; //At least 2 seconds
+  makeSteps();
+  
   Serial.println("DONE");
-  //Link = "/updatePatientParameters?id="+data_patientID+"&bpm="+BPM+"&oxi="+OXI;
   
   delay(3000);  //GET Data at every 3 seconds
 }

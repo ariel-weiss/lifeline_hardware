@@ -3,15 +3,15 @@
 //=======================================================================
 int connect_host(WiFiClientSecure* httpsClient){
   
-  Serial.println("Host: ");
-  Serial.print(host);
+  Serial.println("Connecting to firebase ...");
+  //Serial.print(host);
  
-  Serial.printf("Using fingerprint '%s'\n", fingerprint);
+  //Serial.printf("Using fingerprint '%s'\n", fingerprint);
   (*httpsClient).setFingerprint(fingerprint);
   (*httpsClient).setTimeout(15000); // 15 Seconds
   delay(1000);
   
-  Serial.println("HTTPS Connecting");
+  //Serial.println("HTTPS Connecting");
   int r=0; //retry counter
   while((!(*httpsClient).connect(host, httpsPort)) && (r < 30)){
       delay(100);
@@ -23,22 +23,22 @@ int connect_host(WiFiClientSecure* httpsClient){
     return -1;
   }
   else {
-    Serial.println("Connected to web");
+    Serial.println("Connected.");
   }
   return 0;
 }
 //=======================================================================
 //                    POST data
 //=======================================================================
-String post_data(WiFiClientSecure httpsClient, String Link){
-  Serial.print("Requesting URL: ");
-  Serial.println(host+Link);
+String req(WiFiClientSecure httpsClient, String Link){
+  Serial.print("Requesting ...");
+  //Serial.println(host+Link);
  
   httpsClient.print(String("GET ") + Link + " HTTP/1.1\r\n" +
                "Host: " + host + "\r\n" +               
                "Connection: close\r\n\r\n");
  
-  Serial.println(">Request Sent...");
+  Serial.println(" Request Sent");
                   
   while (httpsClient.connected()) {
     String line = httpsClient.readStringUntil('\n');
@@ -49,7 +49,7 @@ String post_data(WiFiClientSecure httpsClient, String Link){
   }
  
   Serial.println(">Reply Was:");
-  Serial.println("==========");
+  //Serial.println("==========");
   String line;
   String result="";
   while(httpsClient.available()){        
@@ -58,6 +58,23 @@ String post_data(WiFiClientSecure httpsClient, String Link){
     result += line;
   }
   Serial.println("==========");
-  Serial.println("Done.");
+  //Serial.println("Done.");
   return result;
+}
+//=======================================================================
+//                      Parsing
+//=======================================================================
+void parse_ArduinoIDQuery(String json){
+  const size_t capacity = JSON_OBJECT_SIZE(1) + JSON_OBJECT_SIZE(2) + JSON_OBJECT_SIZE(6) + 130;
+  DynamicJsonDocument doc(capacity);
+  
+  //const char* json = "{\"data\":{\"patientID\":\"FZhRr6v5sEvZl9Ib77LJ\",\"sensor\":{\"oxygenPercentage\":95,\"bpm\":95},\"emsID\":\"Tfmx0ibyeaC8hHDAsu4c\",\"manual\":true,\"arduinoID\":\"a\",\"rpm\":12}}";
+
+  deserializeJson(doc, json);
+   
+  JsonObject data = doc["data"];
+  data_patientID = data["patientID"]; // "FZhRr6v5sEvZl9Ib77LJ"
+  
+  
+  
 }

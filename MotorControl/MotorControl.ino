@@ -9,6 +9,8 @@
 int data_rpm;
 bool data_manual;
 const char* data_patientID;
+int data_sensor_oxi;
+int data_sensor_bpm;
 //String data_emsID;
 //==================================// 
 //            WiFi Vars
@@ -28,12 +30,13 @@ const int MAX_LINES = 3;
 //==================================// 
 //           Stepper Vars
 //==================================// 
-const int stepPin = 3; 
-const int dirPin = 4; 
+const int stepPin = 4; //D2
+const int dirPin = 5;  //D1
 const int full_rotation = 200;
-const int cycles = 10;
-int total_steps;
-int total_steps_other_way; 
+const int cycles = 6;
+int total_steps = full_rotation * cycles;
+int push_speed = 1500;
+int RESPIRATIONS_NUM = 10;
 //==================================// 
 //           Functions
 //==================================// 

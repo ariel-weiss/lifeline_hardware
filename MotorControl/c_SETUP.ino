@@ -30,6 +30,5 @@ void setup() {
   pinMode(stepPin,OUTPUT); 
   pinMode(dirPin,OUTPUT);
 
-  total_steps = full_rotation * cycles;
 }
  

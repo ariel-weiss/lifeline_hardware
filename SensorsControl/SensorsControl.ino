@@ -3,7 +3,11 @@
 #include <WiFiClientSecure.h> 
 #include <ESP8266WebServer.h>
 #include <ESP8266HTTPClient.h>
-
+//==================================// 
+//            Query Vars
+//==================================//
+const char* data_patientID;
+bool got_patient = false;
 //==================================// 
 //            WiFi Vars
 //==================================// 
@@ -23,10 +27,11 @@ const int MAX_LINES = 3;
 //==================================// 
 int sensorPin = 0;    // select the input pin for the potentiometer
 int sensorValue = 0;  // variable to store the value coming from the sensor
-
+int oldValue = 0;
 //==================================// 
 //           Functions
 //==================================//
 
 int connect_host(WiFiClientSecure* httpsClient);
-String post_data(WiFiClientSecure httpsClient, String Link);
+String req(WiFiClientSecure httpsClient, String Link);
+void parse_ArduinoIDQuery(String json);

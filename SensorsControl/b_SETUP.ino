@@ -28,5 +28,7 @@ void setup() {
 
   //Sensor:
   pinMode(sensorPin, INPUT);
+
+  Serial.print("Waiting for change ... ");
 }
  
