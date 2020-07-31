@@ -2,7 +2,7 @@
 //                    Connect HTTPS client
 //=======================================================================
 int connect_host(WiFiClientSecure* httpsClient){
-  Serial.print("Connecting to host ... ");
+  Serial.print("Connecting to host ...");
   //Serial.println(host);
  
   //Serial.printf("Using fingerprint '%s'\n", fingerprint);
@@ -90,10 +90,5 @@ void parse_ArduinoIDQuery(String json){
   Serial.print("BPM: ");
   Serial.println(data_sensor_bpm);
   Serial.println("|---------------|");
-  
-}
-
-void parse_PatientQuery(String json){
-
   
 }
