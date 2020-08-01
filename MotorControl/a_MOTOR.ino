@@ -8,9 +8,9 @@ void makeSteps(){
     // Makes 200 pulses for making one full cycle rotation
     for(int x = 0; x < total_steps; x++) {
       digitalWrite(stepPin,HIGH); 
-      delayMicroseconds(2000); 
+      delayMicroseconds(1800); 
       digitalWrite(stepPin,LOW); 
-      delayMicroseconds(2000); 
+      delayMicroseconds(1800); 
       yield();
     }
     Serial.print("Speed: ");
@@ -21,9 +21,9 @@ void makeSteps(){
     // Makes 400 pulses for making two full cycle rotation
     for(int x = 0; x < total_steps ; x++) {
       digitalWrite(stepPin,HIGH);
-      delayMicroseconds(1000);
+      delayMicroseconds(1300);
       digitalWrite(stepPin,LOW);
-      delayMicroseconds(1000);
+      delayMicroseconds(1300);
       yield();
     }
     

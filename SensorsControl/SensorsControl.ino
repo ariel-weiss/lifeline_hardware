@@ -19,7 +19,8 @@ const char *host = "us-central1-lifeline-aa56b.cloudfunctions.net";
 const int httpsPort = 443;  //HTTPS= 443 and HTTP = 80
  
 //SHA1 finger print of certificate use web browser to view and copy
-const char fingerprint[] PROGMEM = "56 17 38 a4 11 9d f8 79 a4 91 c4 8a 2b 3a eb da 03 b5 5b 6e";
+//const char fingerprint[] PROGMEM = "56 17 38 a4 11 9d f8 79 a4 91 c4 8a 2b 3a eb da 03 b5 5b 6e";
+const char fingerprint[] PROGMEM = "b8 28 38 35 06 a4 f8 41 50 b5 b4 d0 6d ce 07 a5 0c 13 2e bd";
 
 const int MAX_LINES = 3;
 //==================================// 

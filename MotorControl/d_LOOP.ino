@@ -15,9 +15,9 @@ void loop() {
 
   //Move stepper:
   if(data_manual){//Control via App: use RPM
-    push_speed = map(data_rpm,12,20,500,1000);
+    push_speed = map(data_rpm,12,20,300,1000);
   }else{//Control via Sensors: use BPM (and OXI not)
-    push_speed = map(data_sensor_bpm,20,120,500,1000);
+    push_speed = map(data_sensor_bpm,20,120,300,1000);
   }
   Serial.print("Push before: ");
   Serial.println(push_speed);

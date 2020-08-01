@@ -6,7 +6,7 @@ void loop() {
   //Check for change in sensors first:
   sensorValue = analogRead(sensorPin);  //Read Analog value of sensor
   sensorValue = map(sensorValue,0,1024,20,60); //Map to 20-60 value
-  //sensorValue = random(20,60); //Read Sensor
+  sensorValue = random(20,60); //Read Sensor
   if(sensorValue == oldValue)
     return; //Nothing changed
   oldValue = sensorValue;
