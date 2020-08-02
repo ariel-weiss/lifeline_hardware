@@ -1,12 +1,39 @@
 //=======================================================================
 //                    Main Program Loop
 //=======================================================================
+void fadeLED(){
+  Serial.print("Led Fade...");
+  for (int brightness = 0; brightness <= 255; brightness += 5) {
+    analogWrite(ledPIN, brightness);
+    delay(30); // Wait for 30 millisecond(s)
+  }
+  for (int brightness = 255; brightness >= 0; brightness -= 5) {
+    analogWrite(ledPIN, brightness);
+    delay(30); // Wait for 30 millisecond(s)
+  }
+  Serial.println("ed.");
+}
 void loop() {
-  
+  //==================================// 
+  //           Button Check
+  //==================================// 
+  delay(10);
+  btnState = digitalRead(btnPIN);
+  if(btnState == HIGH){
+    Serial.println("Pressed!");
+    btnPressed=!btnPressed;
+    delay(1000);
+  }
+  if(btnPressed==false)return;
+  //==================================// 
+  //           Sensor Handle
+  //==================================// 
   //Check for change in sensors first:
-  sensorValue = analogRead(sensorPin);  //Read Analog value of sensor
-  sensorValue = map(sensorValue,0,1024,20,60); //Map to 20-60 value
+  //sensorValue = analogRead(sensorPin);  //Read Analog value of sensor
+  //sensorValue = map(sensorValue,0,1024,20,60); //Map to 20-60 value
   sensorValue = random(20,60); //Read Sensor
+  //Give some indicator with LED:
+  fadeLED();
   if(sensorValue == oldValue)
     return; //Nothing changed
   oldValue = sensorValue;
@@ -16,7 +43,10 @@ void loop() {
   //==================================// 
   WiFiClientSecure httpsClient;
   int client_error_code = connect_host(&httpsClient);
-  if(client_error_code != 0) return;
+  if(client_error_code != 0){
+    Serial.println("Could'nt connect!");
+    return;
+  }
   
   String response;
   String Link;

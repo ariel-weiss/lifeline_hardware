@@ -28,7 +28,8 @@ void setup() {
 
   //Sensor:
   pinMode(sensorPin, INPUT);
-
+  pinMode(ledPIN, OUTPUT);
+  pinMode(btnPIN, INPUT);
   Serial.print("Waiting for change ... ");
 }
  

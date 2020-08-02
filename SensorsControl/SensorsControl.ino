@@ -4,6 +4,13 @@
 #include <ESP8266WebServer.h>
 #include <ESP8266HTTPClient.h>
 //==================================// 
+//           Button&Led Vars
+//==================================// 
+const int btnPIN=4;
+const int ledPIN=14;
+bool btnPressed=false;
+int btnState;
+//==================================// 
 //            Query Vars
 //==================================//
 const char* data_patientID;
